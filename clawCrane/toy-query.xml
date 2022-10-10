@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>toy-query.xml file</comment>
+	
+	<!-- 인형뽑기 : 포인트 사용 -->
+	<entry key = "usePoint">
+	UPDATE POINT SET POINT = POINT - 10
+	</entry>
+	
+	<!-- 인형뽑기 : 총 인형 개수-->
+	<entry key = "toyNumber">
+	SELECT COUNT(*) FROM TOY
+	</entry>
+	
+	<!-- 인형뽑기 : 인형 수량 확인 -->
+	<entry key = "selectToyStock">
+	SELECT TOY_STOCK FROM TOY WHERE TOY_NO = ?
+	</entry>
+	
+	<!-- 인형뽑기 : 뽑은 인형 이름 조회 -->
+	<entry key = "catchToy">
+	SELECT TOY_NAME FROM TOY WHERE TOY_NO = ?
+	</entry>
+	
+	<!-- 인형뽑기 : 뽑은 인형 중복 확인 -->
+	<entry key = "catchExists">
+	SELECT COUNT(*) FROM TOY_CATCH WHERE TOY_NAME = ?
+	</entry>
+	
+	<!-- 인형뽑기 : 처음 뽑은 인형 -->
+	<entry key = "catchInsert">
+	INSERT INTO TOY_CATCH VALUES (?, DEFAULT)
+	</entry>
+	
+	<!-- 인형뽑기 : 뽑은 인형 수량 확인 -->
+	<entry key = "catchToyStock">
+	SELECT TOY_STOCK FROM TOY_CATCH WHERE TOY_NAME = ?
+	</entry>
+	
+	<!-- 인형뽑기 : 중복으로 뽑은 인형 -->
+	<entry key = "catchUpdate">
+	UPDATE TOY_CATCH SET TOY_STOCK = TOY_STOCK + 1 WHERE TOY_NAME = ?
+	</entry>	
+	
+	<!-- 전체 인형 목록 보기 -->
+	<entry key = "selectAllToy">
+	SELECT TOY_NAME, TOY_STOCK FROM TOY
+	</entry>
+
+	<!-- 뽑은 인형 목록 보기 -->
+	<entry key = "selectToy">
+	SELECT * FROM TOY_CATCH
+	</entry>
+	
+	<!-- 기계 안에 인형 넣기 : 넣을 인형 중복 확인 -->
+	<entry key = "insertExists">
+	SELECT COUNT(*) FROM TOY WHERE TOY_NAME = ?
+	</entry>
+	
+	<!-- 기계 안에 인형 넣기 : 새 인형 넣기 -->
+	<entry key = "insertToy">
+	INSERT INTO TOY VALUES (SQ_TOY_NO.NEXTVAL, ?, ?)
+	</entry>
+	
+	<!-- 기계 안에 인형 넣기 : 넣을 수 있는 인형 수량 -->
+	<entry key = "validToyStock">
+	SELECT TOY_STOCK FROM TOY WHERE TOY_NAME = ?
+	</entry>
+	
+	<!-- 기계 안에 인형 넣기 : 기존 인형 수량 추가 -->
+	<entry key = "updateToyStock">
+	UPDATE TOY SET TOY_STOCK = TOY_STOCK + ? WHERE TOY_NAME = ?
+	</entry>
+	
+	<!-- 현재 지갑 사정 보기 -->
+	<entry key = "selectPoint">
+	SELECT * FROM POINT
+	</entry>
+	
+	<!-- 용돈벌기 -->
+	<entry key = "savePoint">
+	UPDATE POINT SET POINT = POINT + ?
+	</entry>
+</properties>
